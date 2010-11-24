@@ -15,6 +15,15 @@ public class Playerlist extends FileLoader {
 	
 	public Playerlist() {
 		this.filename = "whitelist.txt";
+		players = new LinkedHashSet<String>();
+	}
+
+	public boolean addPlayer(String player) {
+		return players.add(player);
+	}
+
+	public boolean removePlayer(String player) {
+		return players.remove(player);
 	}
 
 	public boolean isWhitelisted(String player) {
@@ -28,7 +37,7 @@ public class Playerlist extends FileLoader {
 
 	@Override
 	protected void loadLine(String line) {
-		players.add(line);
+		this.addPlayer(line);
 	}
 
 	@Override

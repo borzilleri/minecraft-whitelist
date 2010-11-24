@@ -10,44 +10,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public abstract class FileLoader {
-	protected String filename = "file.txt";
-	protected String folder = "simpleserver";
+	protected String filename = "";
 	protected String header ="";
+	
 	protected File obtainFile() {
-		File check;
-		File dir = new File(folder);
-		check = new File(filename);
-		File f = new File(folder + File.separator + filename);
-		if (!dir.exists()) {
-			dir.mkdir();			
-		}
-		if (check.exists() && !f.exists()) {
-			try {
-				f.createNewFile();
-				copyFile(check,f);
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-				System.out.println("[SimpleServer] Could not load configuration for " + filename);
-				System.exit(-1);
-			}
-			check.delete();
+		if( filename.isEmpty() ) {
+			System.out.println("Filename is blank.");
+			System.exit(-1);
 		}
 		
-		if (f.exists()) {
-			return f;
-		}
-		else {
+		File check;
+		check = new File(filename);		
+		if( !check.exists() ) {
 			try {
-				f.createNewFile();
-				return f;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
+				check.createNewFile();
+			}
+			catch(Exception e) {
+				Server.log("Could not create file: "+filename);
+				System.out.println("Could not create file: " + filename);
+				System.exit(-1);
 			}
 		}
+
+		return check;
 	}
+	
 	private static void copyFile(File in, File out) throws Exception {
 	    FileInputStream fis  = new FileInputStream(in);
 	    FileOutputStream fos = new FileOutputStream(out);
