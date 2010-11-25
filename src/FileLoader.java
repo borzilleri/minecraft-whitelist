@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.util.logging.Level;
 
 public abstract class FileLoader {
 	protected String filename = "";
@@ -15,7 +15,7 @@ public abstract class FileLoader {
 	
 	protected File obtainFile() {
 		if( filename.isEmpty() ) {
-			System.out.println("Filename is blank.");
+			Server.log(Level.SEVERE, "Filename is blank.");
 			System.exit(-1);
 		}
 		
@@ -26,8 +26,7 @@ public abstract class FileLoader {
 				check.createNewFile();
 			}
 			catch(Exception e) {
-				Server.log("Could not create file: "+filename);
-				System.out.println("Could not create file: " + filename);
+				Server.log(Level.SEVERE, "Could not create file: "+filename);
 				System.exit(-1);
 			}
 		}
@@ -71,7 +70,7 @@ public abstract class FileLoader {
 			}
 		}
 		else {
-			System.out.println("Unable to save " + filename + "!");
+			Server.log(Level.SEVERE, String.format("Unable to save %s", filename));
 		}
 	}
 	protected abstract void beforeLoad();
@@ -101,7 +100,7 @@ public abstract class FileLoader {
 			}
 		}
 		else {
-			System.out.println("Unable to load " + filename + "!");
+			Server.log(Level.SEVERE, String.format("Unable to load %s.", filename));
 		}
 	}
 }
