@@ -22,8 +22,8 @@ public class Whitelist extends Mod {
 		Whitelist.ops.load();
 	}
 
-	protected boolean parseCommand(Player player, String[] tokens, boolean isAdmin) {
-		if( !isAdmin ) return false;
+	protected boolean parseCommand(Player player, String[] tokens) {
+		if( !player.isAdmin() ) return false;
 		
 		String command = tokens[0].substring(1);
 		if( command.equalsIgnoreCase("whitelist") ) {
@@ -60,13 +60,13 @@ public class Whitelist extends Mod {
 	}
 	
 	@Override
-	public boolean onPlayerChat(Player player, String message, boolean isAdmin) {
-		return this.parseCommand(player, message.split(" "), isAdmin);
+	public boolean onPlayerChat(Player player, String message) {
+		return this.parseCommand(player, message.split(" "));
 	}
 
 	@Override
-	public boolean onPlayerCommand(Player player, String[] command, boolean isAdmin) {
-		return this.parseCommand(player, command, isAdmin);
+	public boolean onPlayerCommand(Player player, String[] command) {
+		return this.parseCommand(player, command);
 	}
 	
 	@Override
