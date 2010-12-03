@@ -53,7 +53,7 @@ public class Whitelist extends Mod {
 		}
 		else if( command.equalsIgnoreCase("help") ) {
 			player.sendChat("Whitelist: !whitelist, !unwhitelist");
-			return false;
+			return tokens[0].substring(0,1).equalsIgnoreCase("!");
 		}
 		
 		return false;
@@ -71,8 +71,6 @@ public class Whitelist extends Mod {
 	
 	@Override
 	public String onPlayerLoginCheck(String playerName) {
-		Player player = Server.getPlayer(playerName);
-
 		if( ops.isOp(playerName) ) {
 			Server.log(Level.INFO, "Admin Login: "+playerName);
 			return null;
