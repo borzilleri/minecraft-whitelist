@@ -68,6 +68,13 @@ public class Whitelist extends Mod {
 	public boolean onPlayerCommand(Player player, String[] command) {
 		return this.parseCommand(player, command);
 	}
+
+	@Override
+	public void onPlayerLogin(Player player) {
+		if( !ops.isOp(player.getName()) && !players.isWhitelisted(player.getName()) ) {
+			player.kick("Access Denied");
+		}
+	}
 	
 	@Override
 	public String onPlayerLoginCheck(String playerName) {
