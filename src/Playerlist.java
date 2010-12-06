@@ -19,15 +19,15 @@ public class Playerlist extends FileLoader {
 	}
 
 	public boolean addPlayer(String player) {
-		return players.add(player);
+		return players.add(player.toLowerCase());
 	}
 
 	public boolean removePlayer(String player) {
-		return players.remove(player);
+		return players.remove(player.toLowerCase());
 	}
 
 	public boolean isWhitelisted(String player) {
-		return players.contains(player);
+		return players.contains(player.toLowerCase());
 	}
 
 	@Override
