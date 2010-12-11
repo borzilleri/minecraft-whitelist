@@ -51,12 +51,13 @@ public class Whitelist extends Mod {
 			}
 			return true;
 		}
-		else if( command.equalsIgnoreCase("help") ) {
-			player.sendChat("Whitelist: !whitelist, !unwhitelist");
-			return tokens[0].substring(0,1).equalsIgnoreCase("!");
-		}
 		
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "!whitelist, !unwhitelist";
 	}
 	
 	@Override
